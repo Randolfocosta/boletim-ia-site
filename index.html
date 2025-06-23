@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Boletim de IA</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f9f9f9;
+    }
+    header {
+      background-color: #1a1a1a;
+      color: white;
+      padding: 1rem;
+      text-align: center;
+    }
+    main {
+      padding: 2rem;
+      max-width: 800px;
+      margin: auto;
+    }
+    section {
+      margin-bottom: 2rem;
+    }
+    h2 {
+      border-bottom: 2px solid #1a1a1a;
+      padding-bottom: 0.5rem;
+    }
+    article {
+      background: white;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+    footer {
+      background-color: #1a1a1a;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      margin-top: 2rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Boletim de IA</h1>
+    <p>Atualizado diariamente às 12h50</p>
+  </header>
+  <main>
+    <section>
+      <h2>Destaque do Dia</h2>
+      <article id="destaque">
+        <strong>Carregando notícia em destaque...</strong>
+      </article>
+    </section>
+    <section>
+      <h2>Investimentos e Finanças</h2>
+      <div id="investimentos"></div>
+    </section>
+    <section>
+      <h2>Tecnologia e Produtos</h2>
+      <div id="tecnologia"></div>
+    </section>
+    <section>
+      <h2>Mercado e Empresas</h2>
+      <div id="mercado"></div>
+    </section>
+  </main>
+  <footer>
+    <p>&copy; 2025 Boletim de IA. Notícias automáticas geradas por inteligência artificial.</p>
+  </footer>
+
+  <script>
+    async function carregarNoticias() {
+      const resposta = await fetch("https://boletim-ia-api.vercel.app/noticias");
+      const noticias = await resposta.json();
+
+      document.getElementById("destaque").innerHTML = `<h3>${noticias.destaque.titulo}</h3><p>${noticias.destaque.resumo}</p><a href="${noticias.destaque.link}" target="_blank">Leia mais</a>`;
+
+      function inserirNoticias(id, lista) {
+        const container = document.getElementById(id);
+        container.innerHTML = lista.map(n => `
+          <article>
+            <h4>${n.titulo}</h4>
+            <p>${n.resumo}</p>
+            <a href="${n.link}" target="_blank">Leia mais</a>
+          </article>
+        `).join("");
+      }
+
+      inserirNoticias("investimentos", noticias.investimentos);
+      inserirNoticias("tecnologia", noticias.tecnologia);
+      inserirNoticias("mercado", noticias.mercado);
+    }
+
+    carregarNoticias();
+  </script>
+</body>
+</html>
