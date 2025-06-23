@@ -76,7 +76,7 @@
 
   <script>
     async function carregarNoticias() {
-      const resposta = await fetch("https://boletim-ia-api.vercel.app/noticias");
+      const resposta = await fetch("https://boletim-ia-api.up.railway.app/noticias");
       const noticias = await resposta.json();
 
       document.getElementById("destaque").innerHTML = `<h3>${noticias.destaque.titulo}</h3><p>${noticias.destaque.resumo}</p><a href="${noticias.destaque.link}" target="_blank">Leia mais</a>`;
