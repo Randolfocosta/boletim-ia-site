@@ -79,7 +79,11 @@
       const resposta = await fetch("https://boletim-ia-api.up.railway.app/noticias");
       const noticias = await resposta.json();
 
-      document.getElementById("destaque").innerHTML = `<h3>${noticias.destaque.titulo}</h3><p>${noticias.destaque.resumo}</p><a href="${noticias.destaque.link}" target="_blank">Leia mais</a>`;
+      document.getElementById("destaque").innerHTML = `
+        <h3>${noticias.destaque.titulo}</h3>
+        <p>${noticias.destaque.resumo}</p>
+        <a href="${noticias.destaque.link}" target="_blank">Leia mais</a>
+      `;
 
       function inserirNoticias(id, lista) {
         const container = document.getElementById(id);
